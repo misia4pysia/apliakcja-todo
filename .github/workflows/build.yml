@@ -2,12 +2,9 @@ name: Build iOS
 on: [push]
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
-
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app
 
       - name: Install .NET
         uses: actions/setup-dotnet@v4
@@ -15,7 +12,7 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Install MAUI workloads
-        run: dotnet workload install maui-ios maui-android maui-maccatalyst --version 9.0.21
+        run: dotnet workload install maui-ios maui-android maui-maccatalyst
 
       - name: Restore
         run: dotnet restore ToDoApp/ToDoApp.csproj
