@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:vm="clr-namespace:ToDoApp.ViewModels"
+             x:DataType="vm:MainViewModel"
+
+
+             x:Class="ToDoApp.MainPage">
+
+
+    <!-- xmlns:vm="clr-namespace:ToDoApp.ViewModels"
+x:DataType="vm:MainViewModel" 
+    dziala jak iport w php
+    te linijki mowia xaml gdzie ma szukac mainviewmodel i todoitemviewmodel-->
+    
+        <Grid RowDefinitions="*, Auto">
+
+            <!-- komunikat gdy lista jest pusta -->
+            <Label Grid.Row="0"
+               Text="brak zadan dodaj nowe zadanie"
+               IsVisible="{Binding IsEmpty}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+            <!-- lista zadan gdy nie jest pusta -->
+            <ScrollView Grid.Row="0" IsVisible="{Binding IsNotEmpty}">
+                <VerticalStackLayout Padding="10" Spacing="10">
+
+                        
+                    <!-- zadania do zrobienia -->
+                    <Label Text="{Binding TasksToDo.Count, StringFormat='do zrobienia: {0}'}"
+                       FontAttributes="Bold" />
+
+                    <CollectionView ItemsSource="{Binding TasksToDo}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ToDoItemViewModel">
+                                <SwipeView>
+                                    
+                                    <!-- przeciagnij w lewo jako oznacz jako zrobione -->
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem Text="zrobione"
+                                                   BackgroundColor="Green"
+                                                   Command="{Binding MarkAsDoneCommand}" />
+                                            <SwipeItem Text="edytuj"
+                                                   BackgroundColor="Orange"
+                                                   Command="{Binding EditTaskCommand}" />
+                                            <SwipeItem Text="usun"
+                                                   BackgroundColor="Red"
+                                                   Command="{Binding RemoveTaskCommand}" />
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Label Text="{Binding Title}"
+                                       Padding="10" />
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!-- zadania zrobione -->
+                    <Label Text="{Binding TasksDone.Count, StringFormat='zrobione: {0}'}"
+                       FontAttributes="Bold" />
+
+                    <CollectionView ItemsSource="{Binding TasksDone}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ToDoItemViewModel">
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem Text="usun"
+                                                   BackgroundColor="Red"
+                                                   Command="{Binding RemoveTaskCommand}" />
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Label Text="{Binding Title}"
+                                       Padding="10"
+                                       TextDecorations="Strikethrough" />
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- przycisk dodaj na dole ekranu -->
+            <Button Grid.Row="1"
+                Text="dodaj zadanie"
+                Command="{Binding AddTaskCommand}"
+                Margin="10" />
+
+            </Grid>
+    
+
+</ContentPage>

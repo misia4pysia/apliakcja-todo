@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoApp.Views.FormPage"
+             Title="FormPage">
+    <VerticalStackLayout Padding="20" Spacing="15">
+        
+        <!-- pole tekstowe  x:Name="TaskTitle" dziala jak id="TaskTitle" w html -->
+        <!-- odwoluje sie do niego w kodzie poprzez TaskTitle.Text -->
+
+        <!-- x:Name to dokladnie to samo co id w html -->
+        <Entry x:Name="TaskTitle"
+               Placeholder="wpisz tytul zadania..." />
+
+        
+        <!-- przycisk ktory jest widoczny domyslnie -->
+        <!-- x:Name="AddBtn" dziala jak id="AddBtn" w hrml -->
+        <Button x:Name="AddBtn"
+                Text="dodaj"
+                Clicked="OnAdd" />
+
+        
+        
+        <!-- przycisk edytuj ktory jest domyslnie ukryty -->
+        <!-- pokazuje sie tylko gdy edytujemy istniejace zadanie -->
+        <Button x:Name="EditBtn"
+                Text="edytuj"
+                IsVisible="False"
+                Clicked="OnEdit" />
+
+        
+        <!-- przycisk anuluj ktory jest zawsze widoczny -->
+        <Button x:Name="CancelBtn"
+                Text="anuluj"
+                Clicked="OnCancel" />
+        
+    </VerticalStackLayout>
+</ContentPage>
+    
+    
+    
+    
+<!-- w html wygladaloby to tak
+    <input id="TaskTitle" placeholder="Wpisz tytuł..." />
+<button id="AddBtn" onclick="onAdd()">Dodaj</button> -->
+    
+    
+    
+<!-- odpowiednikiem tego w xaml jest to samo tylko zapisane jak w xaml
+    <Entry x:Name="TaskTitle" Placeholder="Wpisz tytuł..." />
+<Button x:Name="AddBtn" Clicked="OnAdd" Text="Dodaj" />-->
+
+<!-- w html mamy Clicked="OnAdd"
+    natomiast w xaml jest onclick="OnAdd()"
+    to w html podpina metode z pliku 
+    w .cs pod klikniecie przycisku -->
+
