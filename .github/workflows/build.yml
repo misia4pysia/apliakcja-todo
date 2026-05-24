@@ -15,7 +15,7 @@ jobs:
           dotnet-version: '9.0.x'
 
       - name: Install MAUI workloads
-        run: dotnet workload install maui-ios maui-android maui-maccatalyst
+        run: dotnet workload install maui-ios maui-android maui-maccatalyst --version 9.0.21
 
       - name: Restore
         run: dotnet restore ToDoApp/ToDoApp.csproj
