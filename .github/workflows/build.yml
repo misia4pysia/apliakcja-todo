@@ -14,6 +14,9 @@ jobs:
       - name: Install MAUI workloads
         run: dotnet workload install maui-ios maui-android maui-maccatalyst
 
+      - name: Restore
+        run: dotnet restore ToDoApp/ToDoApp.csproj
+
       - name: Build IPA
         run: dotnet publish ToDoApp/ToDoApp.csproj -f net9.0-ios -c Release -p:RuntimeIdentifier=ios-arm64 -p:CodesignKey="" -p:CodesignProvision=""
 
